@@ -1,0 +1,16 @@
+CHANGELOG
+init.rb
+lib/scope_reflection.rb
+lib/scoped_associations.rb
+LICENSE
+Manifest
+Rakefile
+rdoc/classes/ActiveRecord/Associations/ScopeReflection.html
+rdoc/files/lib/scope_reflection_rb.html
+rdoc/files/lib/scoped_associations_rb.html
+rdoc/files/README.html
+README
+spec/models.rb
+spec/scoped_associations_spec.rb
+spec/spec_helper.rb
+spec/test.sqlite3

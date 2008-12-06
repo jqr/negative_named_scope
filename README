@@ -1,0 +1,34 @@
+Negative Named Scope
+====================
+
+Tired of writing both the positive and negative versions of a named_scope?
+Negative Named Scope will automatically generate the NOT'd version of your
+named scope.
+
+Warning: Ruby may treat !nil == true but SQL treats NOT NULL as NULL, see:
+http://en.wikipedia.org/wiki/Null_(SQL)
+
+Example
+=======
+
+named_scope :approved, :conditions => { :approved => true }
+# => named_scope :not_approved, :conditions => "NOT (approved = 't')"
+
+named_scope :published, :conditions => { :published => true }, :negative => :unpublished
+# => named_scope :unpublished, :conditions => "NOT (published = 't')"
+
+named_scope :created_after, lambda { |value| { :conditions => ['created_after', value] } }
+# => named_scope :not_created_after, lambda { |value| :conditions => ["NOT (created_after > = ?)", value] }
+
+
+# suppress the automatic negative named_scope generation
+named_scope :great, :conditions => { :great => true }, :negative => false
+
+
+Install
+=======
+
+./script_plugin install git://github.com/jqr/negative_named_scope.git 
+
+Homepage: http://github.com/jqr/negative_named_scope
+Copyright (c) 2008 Elijah Miller <elijah.miller@gmail.com>, released under the MIT license
