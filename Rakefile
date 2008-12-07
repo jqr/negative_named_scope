@@ -1,26 +1,22 @@
-require 'rake'
-require 'rake/testtask'
-require 'rake/rdoctask'
 require 'spec/rake/spectask'
 
 require 'echoe'
-Echoe.new 'scoped_assocations' do |p|
-
+Echoe.new 'negative_named_scope' do |p|
+  p.description     = "Negative Named Scope will automatically generate the NOT'd version of your named scope."
+  # p.url             = "http://versionable.rubyforge.org"
+  p.author          = "Elijah Miller"
+  p.email           = "elijah.miller@gmail.com"
+  p.retain_gemspec  = true
+  p.need_tar_gz     = false
+  p.extra_deps      = [
+  ]
+  p.ignore_pattern  = ['spec/test.sqlite3']
 end
-
 
 desc 'Default: run specs'
 task :default => :spec
-
-Spec::Rake::SpecTask.new(:spec) do |t|
-  t.spec_files = FileList['spec/**/*_spec.rb']
+Spec::Rake::SpecTask.new do |t|
+  t.spec_files = FileList["spec/**/*_spec.rb"]
 end
 
-desc 'Generate documentation for the scoped_associations plugin.'
-Rake::RDocTask.new(:rdoc) do |rdoc|
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'ScopedAssociations'
-  rdoc.options << '--line-numbers' << '--inline-source'
-  rdoc.rdoc_files.include('README')
-  rdoc.rdoc_files.include('lib/**/*.rb')
-end
+task :test => :spec
